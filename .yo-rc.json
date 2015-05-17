@@ -1,0 +1,19 @@
+{
+  "generator-jhipster": {
+    "baseName": "dryhome",
+    "packageName": "com.dryhome",
+    "packageFolder": "com/dryhome",
+    "authenticationType": "session",
+    "hibernateCache": "ehcache",
+    "clusteredHttpSession": "no",
+    "websocket": "no",
+    "databaseType": "sql",
+    "devDatabaseType": "mysql",
+    "prodDatabaseType": "mysql",
+    "useCompass": false,
+    "buildTool": "maven",
+    "frontendBuilder": "grunt",
+    "javaVersion": "8",
+    "rememberMeKey": "0a7d00da8c32b0e9b9f5e7ebae8996fa2b2295d2"
+  }
+}
