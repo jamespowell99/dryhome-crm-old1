@@ -1,6 +1,8 @@
 package com.dryhome.repository;
 
 import com.dryhome.domain.Customer;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.*;
 import org.springframework.data.repository.query.Param;
 
@@ -11,9 +13,9 @@ import java.util.List;
  */
 public interface CustomerRepository extends JpaRepository<Customer,Long> {
     @Query(
-        value = "SELECT * FROM t_customer WHERE LOWER(name) LIKE LOWER(CONCAT('%',:searchTermCompanyName,'%'))",
-        nativeQuery = true
+        value = "SELECT c FROM Customer c WHERE LOWER(c.name) LIKE LOWER(CONCAT('%',:searchTermCompanyName,'%'))",
+        countQuery = "SELECT count(c) FROM Customer c WHERE LOWER(c.name) LIKE LOWER(CONCAT('%',:searchTermCompanyName,'%'))"
     )
-    public List<Customer> findByCompanyNameLike(@Param("searchTermCompanyName") String searchTermCompanyName);
+    public Page<Customer> findByCompanyNameLike(@Param("searchTermCompanyName") String searchTermCompanyName, Pageable pageable);
 
 }

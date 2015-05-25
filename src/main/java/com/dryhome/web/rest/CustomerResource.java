@@ -118,12 +118,13 @@ public class CustomerResource {
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
 
-    //TODO pagination?
     @RequestMapping(value = "/customers/search", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
-    public ResponseEntity<List<Customer>> search(@RequestParam(value = "companyName", required = true) String companyName) {
-        List<Customer> customerList = customerRepository.findByCompanyNameLike(companyName);
-        return new ResponseEntity<>(customerList, HttpStatus.OK);
+    public ResponseEntity<List<Customer>> search(@RequestParam(value = "companyName", required = true) String companyName, @RequestParam(value = "page", required = false) Integer offset,
+                                                 @RequestParam(value = "per_page", required = false) Integer limit) throws URISyntaxException {
+        Page<Customer> page = customerRepository.findByCompanyNameLike(companyName, PaginationUtil.generatePageRequest(offset, limit, new Sort(Sort.Direction.DESC, "id")));
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/customers/search?companyName=" + companyName, offset, limit);
+        return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
 
     /**

@@ -59,7 +59,7 @@ angular.module('dryhomeApp')
                 //TODO probably a better way for these params
                 $http.get('/api/customers/search?companyName=' + companyNameSearchTerm).success(function (data, status, headers, config) {
                     $scope.customers = data
-                    $scope.links = {};
+                    $scope.links = ParseLinks.parse(headers('link'));
                 })
             } else {
                 $scope.loadAll()
