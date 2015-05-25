@@ -1,0 +1,161 @@
+<div>
+    <h2><span translate="dryhomeApp.customer.detail.title">Customer</span> {{customer.id}}</h2>
+
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th translate="entity.detail.field">Field</th>
+                <th translate="entity.detail.value">Value</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>
+                    <span translate="dryhomeApp.customer.name">Name</span>
+                </td>
+                <td>
+                    <input type="text" class="input-sm form-control" value="{{customer.name}}" readonly>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span translate="dryhomeApp.customer.contactTitle">ContactTitle</span>
+                </td>
+                <td>
+                    <input type="text" class="input-sm form-control" value="{{customer.contactTitle}}" readonly>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span translate="dryhomeApp.customer.contactFirst">ContactFirst</span>
+                </td>
+                <td>
+                    <input type="text" class="input-sm form-control" value="{{customer.contactFirst}}" readonly>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span translate="dryhomeApp.customer.contactSurname">ContactSurname</span>
+                </td>
+                <td>
+                    <input type="text" class="input-sm form-control" value="{{customer.contactSurname}}" readonly>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span translate="dryhomeApp.customer.tel">Tel</span>
+                </td>
+                <td>
+                    <input type="text" class="input-sm form-control" value="{{customer.tel}}" readonly>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span translate="dryhomeApp.customer.mob">Mob</span>
+                </td>
+                <td>
+                    <input type="text" class="input-sm form-control" value="{{customer.mob}}" readonly>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span translate="dryhomeApp.customer.email">Email</span>
+                </td>
+                <td>
+                    <input type="text" class="input-sm form-control" value="{{customer.email}}" readonly>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span translate="dryhomeApp.customer.address1">Address1</span>
+                </td>
+                <td>
+                    <input type="text" class="input-sm form-control" value="{{customer.address1}}" readonly>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span translate="dryhomeApp.customer.address2">Address2</span>
+                </td>
+                <td>
+                    <input type="text" class="input-sm form-control" value="{{customer.address2}}" readonly>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span translate="dryhomeApp.customer.address3">Address3</span>
+                </td>
+                <td>
+                    <input type="text" class="input-sm form-control" value="{{customer.address3}}" readonly>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span translate="dryhomeApp.customer.town">Town</span>
+                </td>
+                <td>
+                    <input type="text" class="input-sm form-control" value="{{customer.town}}" readonly>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span translate="dryhomeApp.customer.postCode">PostCode</span>
+                </td>
+                <td>
+                    <input type="text" class="input-sm form-control" value="{{customer.postCode}}" readonly>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span translate="dryhomeApp.customer.products">Products</span>
+                </td>
+                <td>
+                    <input type="text" class="input-sm form-control" value="{{customer.products}}" readonly>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span translate="dryhomeApp.customer.interested">Interested</span>
+                </td>
+                <td>
+                    <input type="text" class="input-sm form-control" value="{{customer.interested}}" readonly>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span translate="dryhomeApp.customer.paid">Paid</span>
+                </td>
+                <td>
+                    <input type="text" class="input-sm form-control" value="{{customer.paid}}" readonly>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span translate="dryhomeApp.customer.notes">Notes</span>
+                </td>
+                <td>
+                    <input type="text" class="input- form-control" value="{{customer.notes}}" readonly>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="dropdown">
+        <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true">
+            Printing
+            <span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+            <li role="presentation"><a role="menuitem" tabindex="-1" href="api/doc/{{customer.id}}/dp_record">Summary Record</a></li>
+            <li role="presentation"><a role="menuitem" tabindex="-1" href="api/doc/{{customer.id}}/remcon_prod_lit">Remcon Prod Lit</a></li>
+            <li role="presentation"><a role="menuitem" tabindex="-1" href="api/doc/{{customer.id}}/dp_labels">Mailing Labels</a></li>
+        </ul>
+    </div>
+    <div></div>
+    <button type="submit"
+            ui-sref="customer"
+            class="btn btn-info">
+        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span translate="entity.action.back"> Back</span>
+    </button>
+</div>

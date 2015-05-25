@@ -6,6 +6,7 @@
             "home": "Home",
             "entities": {
                 "main": "Entities",
+                "customer": "Customer",
                 "additionalEntity": "JHipster will add addtional entities"
             },
             "account": {

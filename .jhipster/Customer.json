@@ -1,0 +1,164 @@
+{
+    "relationships": [],
+    "fields": [
+        {
+            "fieldId": 1,
+            "fieldName": "name",
+            "fieldType": "String",
+            "fieldNameCapitalized": "Name",
+            "fieldNameUnderscored": "name",
+            "fieldInJavaBeanMethod": "Name",
+            "fieldValidate": true,
+            "fieldValidateRules": [
+                "required",
+                "minlength"
+            ],
+            "fieldValidateRulesMinlength": "2"
+        },
+        {
+            "fieldId": 2,
+            "fieldName": "contactTitle",
+            "fieldType": "String",
+            "fieldNameCapitalized": "ContactTitle",
+            "fieldNameUnderscored": "contact_title",
+            "fieldInJavaBeanMethod": "ContactTitle",
+            "fieldValidate": false
+        },
+        {
+            "fieldId": 3,
+            "fieldName": "contactFirst",
+            "fieldType": "String",
+            "fieldNameCapitalized": "ContactFirst",
+            "fieldNameUnderscored": "contact_first",
+            "fieldInJavaBeanMethod": "ContactFirst",
+            "fieldValidate": false
+        },
+        {
+            "fieldId": 4,
+            "fieldName": "contactSurname",
+            "fieldType": "String",
+            "fieldNameCapitalized": "ContactSurname",
+            "fieldNameUnderscored": "contact_surname",
+            "fieldInJavaBeanMethod": "ContactSurname",
+            "fieldValidate": false
+        },
+        {
+            "fieldId": 5,
+            "fieldName": "tel",
+            "fieldType": "String",
+            "fieldNameCapitalized": "Tel",
+            "fieldNameUnderscored": "tel",
+            "fieldInJavaBeanMethod": "Tel",
+            "fieldValidate": false
+        },
+        {
+            "fieldId": 6,
+            "fieldName": "mob",
+            "fieldType": "String",
+            "fieldNameCapitalized": "Mob",
+            "fieldNameUnderscored": "mob",
+            "fieldInJavaBeanMethod": "Mob",
+            "fieldValidate": false
+        },
+        {
+            "fieldId": 7,
+            "fieldName": "email",
+            "fieldType": "String",
+            "fieldNameCapitalized": "Email",
+            "fieldNameUnderscored": "email",
+            "fieldInJavaBeanMethod": "Email",
+            "fieldValidate": false
+        },
+        {
+            "fieldId": 8,
+            "fieldName": "address1",
+            "fieldType": "String",
+            "fieldNameCapitalized": "Address1",
+            "fieldNameUnderscored": "address1",
+            "fieldInJavaBeanMethod": "Address1",
+            "fieldValidate": false
+        },
+        {
+            "fieldId": 9,
+            "fieldName": "address2",
+            "fieldType": "String",
+            "fieldNameCapitalized": "Address2",
+            "fieldNameUnderscored": "address2",
+            "fieldInJavaBeanMethod": "Address2",
+            "fieldValidate": false
+        },
+        {
+            "fieldId": 10,
+            "fieldName": "address3",
+            "fieldType": "String",
+            "fieldNameCapitalized": "Address3",
+            "fieldNameUnderscored": "address3",
+            "fieldInJavaBeanMethod": "Address3",
+            "fieldValidate": false
+        },
+        {
+            "fieldId": 11,
+            "fieldName": "town",
+            "fieldType": "String",
+            "fieldNameCapitalized": "Town",
+            "fieldNameUnderscored": "town",
+            "fieldInJavaBeanMethod": "Town",
+            "fieldValidate": false
+        },
+        {
+            "fieldId": 12,
+            "fieldName": "postCode",
+            "fieldType": "String",
+            "fieldNameCapitalized": "PostCode",
+            "fieldNameUnderscored": "post_code",
+            "fieldInJavaBeanMethod": "PostCode",
+            "fieldValidate": false
+        },
+        {
+            "fieldId": 13,
+            "fieldName": "products",
+            "fieldType": "String",
+            "fieldNameCapitalized": "Products",
+            "fieldNameUnderscored": "products",
+            "fieldInJavaBeanMethod": "Products",
+            "fieldValidate": false
+        },
+        {
+            "fieldId": 14,
+            "fieldName": "interested",
+            "fieldType": "String",
+            "fieldNameCapitalized": "Interested",
+            "fieldNameUnderscored": "interested",
+            "fieldInJavaBeanMethod": "Interested",
+            "fieldValidate": false
+        },
+        {
+            "fieldId": 15,
+            "fieldName": "paid",
+            "fieldType": "BigDecimal",
+            "fieldNameCapitalized": "Paid",
+            "fieldNameUnderscored": "paid",
+            "fieldInJavaBeanMethod": "Paid",
+            "fieldValidate": false
+        },
+        {
+            "fieldId": 16,
+            "fieldName": "notes",
+            "fieldType": "String",
+            "fieldNameCapitalized": "Notes",
+            "fieldNameUnderscored": "notes",
+            "fieldInJavaBeanMethod": "Notes",
+            "fieldValidate": false
+        }
+    ],
+    "fieldsContainOwnerManyToMany": false,
+    "fieldsContainOneToMany": false,
+    "fieldsContainLocalDate": false,
+    "fieldsContainCustomTime": false,
+    "fieldsContainBigDecimal": true,
+    "fieldsContainDateTime": false,
+    "fieldsContainDate": false,
+    "changelogDate": "20150519152952",
+    "pagination": "pagination",
+    "validation": true
+}
