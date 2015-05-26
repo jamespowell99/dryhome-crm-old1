@@ -4,6 +4,7 @@ angular.module('dryhomeApp')
     .controller('CustomerController', function ($scope, Customer, ParseLinks, $http) {
         $scope.customers = [];
         $scope.page = 1;
+        $scope.searchTerm = '';
         $scope.loadAll = function() {
             Customer.query({page: $scope.page, per_page: 20}, function(result, headers) {
                 $scope.links = ParseLinks.parse(headers('link'));
@@ -12,7 +13,15 @@ angular.module('dryhomeApp')
         };
         $scope.loadPage = function(page) {
             $scope.page = page;
-            $scope.loadAll();
+            if($scope.searchTerm) {
+                //TODO probably a better way for these params
+                $http.get('/api/customers/search?companyName=' + $scope.searchTerm + '&page= ' + $scope.page + '&per_page=20').success(function (data, status, headers, config) {
+                    $scope.customers = data
+                    $scope.links = ParseLinks.parse(headers('link'));
+                })
+            } else {
+                $scope.loadAll()
+            }
         };
         $scope.loadAll();
 
@@ -54,15 +63,8 @@ angular.module('dryhomeApp')
             $scope.editForm.$setUntouched();
         };
 
-        $scope.instantSearch = function(companyNameSearchTerm) {
-            if(companyNameSearchTerm) {
-                //TODO probably a better way for these params
-                $http.get('/api/customers/search?companyName=' + companyNameSearchTerm).success(function (data, status, headers, config) {
-                    $scope.customers = data
-                    $scope.links = ParseLinks.parse(headers('link'));
-                })
-            } else {
-                $scope.loadAll()
-            }
-        }
+
+        $scope.$watch('searchTerm', function() {
+            $scope.loadPage(1)
+        });
     });
