@@ -15,7 +15,7 @@ angular.module('dryhomeApp')
             $scope.page = page;
             if($scope.searchTerm) {
                 //TODO probably a better way for these params
-                $http.get('/api/customers/search?companyName=' + $scope.searchTerm + '&page= ' + $scope.page + '&per_page=20').success(function (data, status, headers, config) {
+                $http.get('/api/customers/search?searchTerm=' + $scope.searchTerm + '&page= ' + $scope.page + '&per_page=20').success(function (data, status, headers, config) {
                     $scope.customers = data
                     $scope.links = ParseLinks.parse(headers('link'));
                 })
@@ -63,8 +63,8 @@ angular.module('dryhomeApp')
             $scope.editForm.$setUntouched();
         };
 
-
         $scope.$watch('searchTerm', function() {
             $scope.loadPage(1)
         });
+
     });

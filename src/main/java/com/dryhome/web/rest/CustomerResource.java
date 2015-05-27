@@ -120,10 +120,10 @@ public class CustomerResource {
 
     @RequestMapping(value = "/customers/search", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
-    public ResponseEntity<List<Customer>> search(@RequestParam(value = "companyName", required = true) String companyName, @RequestParam(value = "page", required = false) Integer offset,
+    public ResponseEntity<List<Customer>> search(@RequestParam(value = "searchTerm", required = true) String searchTerm, @RequestParam(value = "page", required = false) Integer offset,
                                                  @RequestParam(value = "per_page", required = false) Integer limit) throws URISyntaxException {
-        Page<Customer> page = customerRepository.findByCompanyNameLike(companyName, PaginationUtil.generatePageRequest(offset, limit, new Sort(Sort.Direction.DESC, "id")));
-        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/customers/search?companyName=" + companyName, offset, limit);
+        Page<Customer> page = customerRepository.findByMultipleFields(searchTerm, PaginationUtil.generatePageRequest(offset, limit, new Sort(Sort.Direction.DESC, "id")));
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/customers/search?searchTerm=" + searchTerm, offset, limit);
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
 
