@@ -135,7 +135,7 @@
                     <span translate="dryhomeApp.customer.notes">Notes</span>
                 </td>
                 <td>
-                    <input type="text" class="input- form-control" value="{{customer.notes}}" readonly>
+                    <textarea readonly class="form-control" content="test" rows="10">{{customer.notes}}</textarea>
                 </td>
             </tr>
             </tbody>
@@ -148,7 +148,7 @@
         </button>
         <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
             <li role="presentation"><a role="menuitem" tabindex="-1" href="api/doc/{{customer.id}}/dp_record">Summary Record</a></li>
-            <li role="presentation"><a role="menuitem" tabindex="-1" href="api/doc/{{customer.id}}/remcon_prod_lit">Remcon Prod Lit</a></li>
+            <li role="presentation"><a role="menuitem" tabindex="-1" href="api/doc/{{customer.id}}/dp_remcon_prod_lit">Remcon Prod Lit</a></li>
             <li role="presentation"><a role="menuitem" tabindex="-1" href="api/doc/{{customer.id}}/dp_labels">Mailing Labels</a></li>
         </ul>
     </div>

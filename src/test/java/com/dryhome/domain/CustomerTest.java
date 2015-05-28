@@ -1,10 +1,16 @@
 package com.dryhome.domain;
 
+import com.powtechconsulting.mailmerge.WordMerger;
+import org.junit.Ignore;
 import org.junit.Test;
 
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.net.URL;
 import java.util.Map;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 
 
 public class CustomerTest {
@@ -29,13 +35,31 @@ public class CustomerTest {
         customer.setAddress3(null);
 
         Map<String, String> map = customer.toMergeMap();
-        assertEquals("Mr James Powell", map.get("fullNameAddressLine1"));
-        assertEquals(customer.getName(), map.get("fullNameAddressLine2"));
-        assertEquals(customer.getAddress1(), map.get("fullNameAddressLine3"));
-        assertEquals(customer.getTown(), map.get("fullNameAddressLine4"));
-        assertEquals(customer.getPostCode(), map.get("fullNameAddressLine5"));
-        assertEquals("", map.get("fullNameAddressLine6"));
-        assertEquals("", map.get("fullNameAddressLine7"));
+        assertEquals("", map.get("fullNameAddressLine1"));
+        assertEquals("", map.get("fullNameAddressLine2"));
+        assertEquals("Mr James Powell", map.get("fullNameAddressLine3"));
+        assertEquals(customer.getName(), map.get("fullNameAddressLine4"));
+        assertEquals(customer.getAddress1(), map.get("fullNameAddressLine5"));
+        assertEquals(customer.getTown(), map.get("fullNameAddressLine6"));
+        assertEquals(customer.getPostCode(), map.get("fullNameAddressLine7"));
+    }
+
+    @Test
+    public void testDate() {
+        assertNotNull("", customer().toMergeMap().get("currentDateTime"));
+    }
+
+
+    @Ignore
+    @Test
+    public void testMerge() throws IOException {
+        String templateFile = "dp_remcon_prod_lit.docx";
+        URL resource = this.getClass().getClassLoader().getResource("merge-docs/" + templateFile);
+        String filename = resource.getFile();
+        byte[] bytes = new WordMerger().merge(filename, customer().toMergeMap());
+        FileOutputStream fos = new FileOutputStream(templateFile.replace(".", "_test_" + System.currentTimeMillis() + "."));
+        fos.write(bytes);
+        fos.close();
     }
 
     private Customer customer() {

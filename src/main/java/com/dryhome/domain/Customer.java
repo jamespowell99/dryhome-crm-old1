@@ -15,9 +15,11 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -267,6 +269,8 @@ public class Customer implements Serializable {
 
     public Map<String, String> toMergeMap() {
         HashMap<String, String> map = new HashMap<>();
+        SimpleDateFormat sdf = new SimpleDateFormat("MMM dd, yyyy");
+        map.put("currentDateTime", sdf.format(new Date()));
         map.put("companyId", Long.toString(id));
         map.put("companyName", name);
         map.put("contact", contactTitle + " " + contactFirst + " " + contactSurname);
@@ -278,20 +282,19 @@ public class Customer implements Serializable {
         map.put("prod", products);
         map.put("address", Joiner.on(", ").skipNulls().join(address1, address2, address3, town, postCode));
 
-
-
         //TODO use streams!!
-        List<String> addressList = new ArrayList<>(Arrays.asList(map.get("contact"), name, address1, address2, address3, town, postCode));
+        List<String> addressList = new ArrayList<>(Arrays.asList(postCode, town, address3, address2, address1, name, map.get("contact")));
         addressList.removeAll(Arrays.asList(null, "", " "));
-        int i;
-        for (i = 1; i <= addressList.size(); i++) {
-            map.put("fullNameAddressLine" + i, addressList.get(i-1));
+        int i = 7;
+        for(String element : addressList) {
+            map.put("fullNameAddressLine" + i, element);
+            i--;
         }
-        while( i <= 7) {
+
+        while( i >= 1) {
             map.put("fullNameAddressLine" + i, "");
-            i++;
+            i--;
         }
-        map.put("test3", "james");
 
         return map;
     }
