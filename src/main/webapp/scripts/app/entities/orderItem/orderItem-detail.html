@@ -1,0 +1,78 @@
+
+<div>
+    <h2><span translate="dryhomeApp.orderItem.detail.title">OrderItem</span> {{orderItem.id}}</h2>
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th translate="entity.detail.field">Field</th>
+                    <th translate="entity.detail.value">Value</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+                        <span translate="dryhomeApp.orderItem.price">Price</span>
+                    </td>
+                    <td>
+                        <input type="text" class="input-sm form-control" value="{{orderItem.price}}" readonly>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span translate="dryhomeApp.orderItem.qty">Qty</span>
+                    </td>
+                    <td>
+                        <input type="text" class="input-sm form-control" value="{{orderItem.qty}}" readonly>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span translate="dryhomeApp.orderItem.notes">Notes</span>
+                    </td>
+                    <td>
+                        <input type="text" class="input-sm form-control" value="{{orderItem.notes}}" readonly>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span translate="dryhomeApp.orderItem.order">Order</span>
+                    </td>
+                    <td>
+                        <input type="text" class="input-sm form-control" value="{{orderItem.order}}" readonly>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span translate="dryhomeApp.orderItem.serialNumber">SerialNumber</span>
+                    </td>
+                    <td>
+                        <input type="text" class="input-sm form-control" value="{{orderItem.serialNumber}}" readonly>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span translate="dryhomeApp.orderItem.orderId">orderId</span>
+                    </td>
+                    <td>
+                        <input type="text" class="input-sm form-control" value="{{orderItem.orderId.id}}" readonly>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span translate="dryhomeApp.orderItem.product">product</span>
+                    </td>
+                    <td>
+                        <input type="text" class="input-sm form-control" value="{{orderItem.product.name}}" readonly>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <button type="submit"
+            ui-sref="orderItem"
+            class="btn btn-info">
+        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span translate="entity.action.back"> Back</span>
+    </button>
+</div>

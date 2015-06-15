@@ -1,0 +1,229 @@
+<div>
+
+    <h2 translate="dryhomeApp.order.home.title">Order</h2>
+
+    <button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#saveOrderModal" ng-click="clear()">
+        <span class="glyphicon glyphicon-flash"></span> <span translate="dryhomeApp.order.home.createLabel">Create a new Order</span>
+    </button>
+    <div class="modal fade" id="saveOrderModal" tabindex="-1" role="dialog" aria-labelledby="myOrderLabel"
+         aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <form name="editForm" role="form" novalidate ng-submit="create()" show-validation>
+
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                                ng-click="clear()">&times;</button>
+                        <h4 class="modal-title" id="myOrderLabel" translate="dryhomeApp.order.home.createOrEditLabel">Create or edit a Order</h4>
+                    </div>
+                    <div class="modal-body">
+                            <div class="form-group">
+                                <label>ID</label>
+                                <input type="text" class="form-control" name="id"
+                                       ng-model="order.id" readonly>
+                            </div>
+
+                        <div class="form-group">
+                            <label translate="dryhomeApp.order.orderNumber">OrderNumber</label>
+                            <input type="text" class="form-control" name="orderNumber"
+                                   ng-model="order.orderNumber" required ng-minlength="3" ng-maxlength="15">
+
+                            <div ng-show="editForm.orderNumber.$invalid">
+                                <p class="help-block"
+                                   ng-show="editForm.orderNumber.$error.required" translate="entity.validation.required">
+                                    This field is required.
+                                </p>
+                                <p class="help-block"
+                                   ng-show="editForm.orderNumber.$error.minlength" translate="entity.validation.minlength" translate-value-min="3">
+                                    This field is required to be at least 3 characters.
+                                </p>
+                                <p class="help-block"
+                                   ng-show="editForm.orderNumber.$error.maxlength" translate="entity.validation.maxlength" translate-value-max="15">
+                                    This field cannot be longer than 15 characters.
+                                </p>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label translate="dryhomeApp.order.orderDate">OrderDate</label>
+                            <input type="date" class="form-control" name="orderDate"
+                                   ng-model="order.orderDate">
+
+                        </div>
+                        <div class="form-group">
+                            <label translate="dryhomeApp.order.dispatchDate">DispatchDate</label>
+                            <input type="date" class="form-control" name="dispatchDate"
+                                   ng-model="order.dispatchDate">
+
+                        </div>
+                        <div class="form-group">
+                            <label translate="dryhomeApp.order.invoiceDate">InvoiceDate</label>
+                            <input type="date" class="form-control" name="invoiceDate"
+                                   ng-model="order.invoiceDate">
+
+                        </div>
+                        <div class="form-group">
+                            <label translate="dryhomeApp.order.placedBy">PlacedBy</label>
+                            <input type="text" class="form-control" name="placedBy"
+                                   ng-model="order.placedBy">
+
+                        </div>
+                        <div class="form-group">
+                            <label translate="dryhomeApp.order.method">Method</label>
+                            <input type="text" class="form-control" name="method"
+                                   ng-model="order.method">
+
+                        </div>
+                        <div class="form-group">
+                            <label translate="dryhomeApp.order.invoiceNumber">InvoiceNumber</label>
+                            <input type="text" class="form-control" name="invoiceNumber"
+                                   ng-model="order.invoiceNumber">
+
+                        </div>
+                        <div class="form-group">
+                            <label translate="dryhomeApp.order.invoiceNotes1">InvoiceNotes1</label>
+                            <input type="text" class="form-control" name="invoiceNotes1"
+                                   ng-model="order.invoiceNotes1">
+
+                        </div>
+                        <div class="form-group">
+                            <label translate="dryhomeApp.order.invoiceNotes2">InvoiceNotes2</label>
+                            <input type="text" class="form-control" name="invoiceNotes2"
+                                   ng-model="order.invoiceNotes2">
+
+                        </div>
+                        <div class="form-group">
+                            <label translate="dryhomeApp.order.notes">Notes</label>
+                            <input type="text" class="form-control" name="notes"
+                                   ng-model="order.notes">
+
+                        </div>
+                        <div class="form-group">
+                            <label translate="dryhomeApp.order.paymentDate">PaymentDate</label>
+                            <input type="date" class="form-control" name="paymentDate"
+                                   ng-model="order.paymentDate">
+
+                        </div>
+                        <div class="form-group">
+                            <label translate="dryhomeApp.order.paymentStatus">PaymentStatus</label>
+                            <input type="text" class="form-control" name="paymentStatus"
+                                   ng-model="order.paymentStatus">
+
+                        </div>
+                        <div class="form-group">
+                            <label translate="dryhomeApp.order.paymentType">PaymentType</label>
+                            <input type="text" class="form-control" name="paymentType"
+                                   ng-model="order.paymentType">
+
+                        </div>
+                        <div class="form-group">
+                            <label translate="dryhomeApp.order.paymentAmount">PaymentAmount</label>
+                            <input type="text" class="form-control" name="paymentAmount"
+                                   ng-model="order.paymentAmount">
+
+                        </div>
+                        <div class="form-group">
+                            <label translate="dryhomeApp.order.vatRate">VatRate</label>
+                            <input type="number" class="form-control" name="vatRate"
+                                   ng-model="order.vatRate">
+
+                        </div>
+
+                        <div class="form-group">
+                            <label translate="dryhomeApp.order.customer">customer</label>
+                            <select class="form-control" name="customer" ng-model="order.customer.id" ng-options="customer.id as customer.name for customer in customers">
+                            </select>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="clear()">
+                            <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span translate="entity.action.cancel">Cancel</span>
+                        </button>
+                        <button type="submit" ng-disabled="editForm.$invalid" class="btn btn-primary">
+                            <span class="glyphicon glyphicon-save"></span>&nbsp;<span translate="entity.action.save">Save</span>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="deleteOrderConfirmation">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <form name="deleteForm" ng-submit="confirmDelete(order.id)">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                                ng-click="clear()">&times;</button>
+                        <h4 class="modal-title" translate="entity.delete.title">Confirm delete operation</h4>
+                    </div>
+                    <div class="modal-body">
+                        <p translate="dryhomeApp.order.delete.question" translate-values="{id: '{{order.id}}'}">Are you sure you want to delete this Order?</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="clear()">
+                            <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span translate="entity.action.cancel">Cancel</span>
+                        </button>
+                        <button type="submit" ng-disabled="deleteForm.$invalid" class="btn btn-danger">
+                            <span class="glyphicon glyphicon-remove-circle"></span>&nbsp;<span translate="entity.action.delete">Delete</span>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th translate="dryhomeApp.order.orderNumber">OrderNumber</th>
+                    <th translate="dryhomeApp.order.customer">customer</th>
+                    <th translate="dryhomeApp.order.orderDate">OrderDate</th>
+                    <th translate="dryhomeApp.order.dispatchDate">DispatchDate</th>
+                    <th translate="dryhomeApp.order.invoiceDate">InvoiceDate</th>
+                    <th translate="dryhomeApp.order.invoiceNumber">InvoiceNumber</th>
+                    <th translate="dryhomeApp.order.paymentDate">PaymentDate</th>
+                    <th>Total Amount</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="order in orders">
+                    <td><a ui-sref="orderDetail({id:order.id})">{{order.orderNumber}}</a></td>
+                    <td>{{order.customer.name}}</td>
+                    <td>{{order.orderDate}}</td>
+                    <td>{{order.dispatchDate}}</td>
+                    <td>{{order.invoiceDate}}</td>
+                    <td>{{order.invoiceNumber}}</td>
+                    <td>{{order.paymentDate}}</td>
+                    <td></td>
+                    <td>
+                        <button type="submit"
+                                ng-click="update(order.id)"
+                                class="btn btn-primary">
+                            <span class="glyphicon glyphicon-pencil"></span>&nbsp;<span translate="entity.action.edit"> Edit</span>
+                        </button>
+                        <button type="submit"
+                                ng-click="delete(order.id)"
+                                class="btn btn-danger">
+                            <span class="glyphicon glyphicon-remove-circle"></span>&nbsp;<span translate="entity.action.delete"> Delete</span>
+                        </button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <nav>
+            <ul class="pagination">
+                <li ng-show="links['first']" ng-click="loadPage(links['first'])"><a>&lt;&lt;</a></li>
+                <li ng-show="links['prev']" ng-click="loadPage(links['prev'])"><a>&lt;</a></li>
+                <li ng-show="page > 2" ng-click="loadPage(page - 2)"><a>{{page - 2}}</a></li>
+                <li ng-show="page > 1" ng-click="loadPage(page - 1)"><a>{{page - 1}}</a></li>
+                <li class="active"><a>{{page}}</a></li>
+                <li ng-show="page < links['last']" ng-click="loadPage(page + 1)"><a>{{page + 1}}</a></li>
+                <li ng-show="page < links['last'] - 1" ng-click="loadPage(page + 2)"><a>{{page + 2}}</a></li>
+                <li ng-show="links['next']" ng-click="loadPage(links['next'])"><a>&gt;</a></li>
+                <li ng-show="links['last']" ng-click="loadPage(links['last'])"><a>&gt;&gt;</a></li>
+            </ul>
+        </nav>
+    </div>
+</div>

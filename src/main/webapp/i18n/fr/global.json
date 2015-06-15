@@ -7,6 +7,9 @@
             "entities": {
                 "main": "Entités",
                 "customer": "Customer",
+                "order": "Order",
+                "product": "Product",
+                "orderItem": "OrderItem",
                 "additionalEntity": "JHipster will add addtional entities"
             },
             "account": {

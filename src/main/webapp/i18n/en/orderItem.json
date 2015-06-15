@@ -1,0 +1,24 @@
+{
+    "dryhomeApp": {
+        "orderItem" : {
+            "home": {
+                "title": "OrderItems",
+                "createLabel": "Create a new OrderItem",
+                "createOrEditLabel": "Create or edit a OrderItem"
+            },
+            "delete": {
+                "question": "Are you sure you want to delete OrderItem {{ id }}?"
+            },
+            "detail": {
+                "title": "OrderItem"
+            },
+            "price": "Price",
+            "qty": "Qty",
+            "notes": "Notes",
+            "order": "Order",
+            "serialNumber": "SerialNumber",
+            "orderId": "orderId",
+            "product": "product"
+        }
+    }
+}

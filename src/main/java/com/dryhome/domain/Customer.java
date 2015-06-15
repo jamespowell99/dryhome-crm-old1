@@ -1,7 +1,6 @@
 package com.dryhome.domain;
 
 import com.google.common.base.Joiner;
-import org.apache.commons.lang.StringUtils;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
@@ -13,17 +12,22 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.Marshaller;
+import java.beans.Statement;
 import java.io.Serializable;
+import java.io.StringWriter;
 import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Objects;
+import java.util.Optional;
+
+import static com.dryhome.utils.StringPrintUtils.valueOrEmpty;
 
 /**
  * A Customer.
@@ -31,7 +35,7 @@ import java.util.Objects;
 @Entity
 @Table(name = "T_CUSTOMER")
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-public class Customer implements Serializable {
+public class Customer implements Serializable, MergeableObject {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -267,35 +271,71 @@ public class Customer implements Serializable {
             '}';
     }
 
-    public Map<String, String> toMergeMap() {
-        HashMap<String, String> map = new HashMap<>();
+    public CustomerView toView() {
+        CustomerView customerView = new CustomerView();
+
+        //Simple fields
+        customerView.setId(id.toString());
+        customerView.setName(name);
+        customerView.setTel(valueOrEmpty(tel));
+        customerView.setMob(valueOrEmpty(mob));
+        customerView.setPaid(Optional.ofNullable(paid).orElse(BigDecimal.ZERO).toString());
+        customerView.setProd(valueOrEmpty(products));
+        customerView.setNotes(valueOrEmpty(notes));
+        customerView.setContact(contactTitle + " " + contactFirst + " " + contactSurname);
         SimpleDateFormat sdf = new SimpleDateFormat("MMM dd, yyyy");
-        map.put("currentDateTime", sdf.format(new Date()));
-        map.put("companyId", Long.toString(id));
-        map.put("companyName", name);
-        map.put("contact", contactTitle + " " + contactFirst + " " + contactSurname);
-        map.put("tel", tel);
-        map.put("mob", mob);
-        if (paid != null) {
-            map.put("paid", paid.toPlainString());
-        }
-        map.put("prod", products);
-        map.put("address", Joiner.on(", ").skipNulls().join(address1, address2, address3, town, postCode));
+        customerView.setCurrentDateTime(sdf.format(new Date()));
 
-        //TODO use streams!!
-        List<String> addressList = new ArrayList<>(Arrays.asList(postCode, town, address3, address2, address1, name, map.get("contact")));
-        addressList.removeAll(Arrays.asList(null, "", " "));
-        int i = 7;
-        for(String element : addressList) {
-            map.put("fullNameAddressLine" + i, element);
-            i--;
-        }
+        try {
+            List<String> fullNameAddressList = new ArrayList<>(Arrays.asList(postCode, town, address3, address2, address1, name, customerView.getContact()));
+            fullNameAddressList.removeAll(Arrays.asList(null, "", " "));
+            //TODO refactor this to use a list
+            int i = 7;
+            for (String item : fullNameAddressList) {
+                Statement statement = new Statement(customerView, "setFullNameAddressLine" + i, new String[]{item});
+                statement.execute();
+                i--;
+            }
 
-        while( i >= 1) {
-            map.put("fullNameAddressLine" + i, "");
-            i--;
-        }
+            while (i >= 1) {
+                Statement statement = new Statement(customerView, "setFullNameAddressLine" + i, new String[]{" "});
+                statement.execute();
+                i--;
+            }
 
-        return map;
+            List<String> addressList = new ArrayList<>(Arrays.asList(address1, address2, address3, town, postCode));
+            addressList.removeAll(Arrays.asList(null, "", " "));
+            String fullAddressString = Joiner.on("\n").join(addressList);
+            customerView.setFullAddress(fullAddressString);
+            customerView.setFullAddressLines(addressList);
+            for (i = customerView.getFullAddressLines().size(); i < 5; i++) {
+                customerView.getFullAddressLines().add(i, " ");
+            }
+
+            Collections.reverse(fullNameAddressList);
+            String fullNameAddressString = Joiner.on("\n").join(fullNameAddressList);
+            customerView.setFullNameAddress(fullNameAddressString);
+            return customerView;
+        } catch (Exception e) {
+            throw new IllegalStateException("failed to create view: " + id, e);
+        }
+    }
+
+    //TODO scope to refactor this into a shared service?
+    @Override
+    public String marshallToXml() {
+        try {
+            CustomerView customerView = toView();
+            JAXBContext context = JAXBContext.newInstance(CustomerView.class);
+
+            Marshaller m = context.createMarshaller();
+            m.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
+
+            StringWriter writer = new StringWriter();
+            m.marshal(customerView, writer);
+            return writer.toString();
+        } catch (Exception e) {
+            throw new IllegalStateException("failed to marshal customer: " + id, e);
+        }
     }
 }

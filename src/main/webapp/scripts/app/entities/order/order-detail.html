@@ -1,0 +1,160 @@
+
+<div>
+    <h2><span translate="dryhomeApp.order.detail.title">Order number: </span> {{order.orderNumber}}<span> - </span> {{order.customer.name}}</h2>
+    <div class="table-responsive">
+        <div class="form-group">
+            <label>ID</label>
+            <input type="text" class="form-control" name="id"
+                   ng-model="order.id" readonly>
+        </div>
+        <div class="form-group">
+            <label translate="dryhomeApp.order.orderDate">OrderDate</label>
+            <input type="date" class="form-control" name="orderDate"
+                   ng-model="order.orderDate" readonly>
+
+        </div>
+        <div class="form-group">
+            <label translate="dryhomeApp.order.dispatchDate">DispatchDate</label>
+            <input type="date" class="form-control" name="dispatchDate"
+                   ng-model="order.dispatchDate" readonly>
+
+        </div>
+        <div class="form-group">
+            <label translate="dryhomeApp.order.invoiceDate">InvoiceDate</label>
+            <input type="date" class="form-control" name="invoiceDate"
+                   ng-model="order.invoiceDate" readonly>
+
+        </div>
+        <div class="form-group">
+            <label translate="dryhomeApp.order.placedBy">PlacedBy</label>
+            <input type="text" class="form-control" name="placedBy"
+                   ng-model="order.placedBy" readonly>
+
+        </div>
+        <div class="form-group">
+            <label translate="dryhomeApp.order.method">Method</label>
+            <input type="text" class="form-control" name="method"
+                   ng-model="order.method" readonly>
+
+        </div>
+        <div class="form-group">
+            <label translate="dryhomeApp.order.invoiceNumber">InvoiceNumber</label>
+            <input type="text" class="form-control" name="invoiceNumber"
+                   ng-model="order.invoiceNumber" readonly>
+
+        </div>
+        <div class="form-group">
+            <label translate="dryhomeApp.order.invoiceNotes1">InvoiceNotes1</label>
+            <input type="text" class="form-control" name="invoiceNotes1"
+                   ng-model="order.invoiceNotes1" readonly>
+
+        </div>
+        <div class="form-group">
+            <label translate="dryhomeApp.order.invoiceNotes2">InvoiceNotes2</label>
+            <input type="text" class="form-control" name="invoiceNotes2"
+                   ng-model="order.invoiceNotes2" readonly>
+
+        </div>
+        <div class="form-group">
+            <label translate="dryhomeApp.order.notes">Notes</label>
+            <input type="text" class="form-control" name="notes"
+                   ng-model="order.notes" readonly>
+
+        </div>
+        <div class="form-group">
+            <label translate="dryhomeApp.order.paymentDate">PaymentDate</label>
+            <input type="date" class="form-control" name="paymentDate"
+                   ng-model="order.paymentDate" readonly>
+
+        </div>
+        <div class="form-group">
+            <label translate="dryhomeApp.order.paymentStatus">PaymentStatus</label>
+            <input type="text" class="form-control" name="paymentStatus"
+                   ng-model="order.paymentStatus" readonly>
+
+        </div>
+        <div class="form-group">
+            <label translate="dryhomeApp.order.paymentType">PaymentType</label>
+            <input type="text" class="form-control" name="paymentType"
+                   ng-model="order.paymentType" readonly>
+
+        </div>
+        <div class="form-group">
+            <label translate="dryhomeApp.order.paymentAmount">PaymentAmount</label>
+            <input type="text" class="form-control" name="paymentAmount"
+                   ng-model="order.paymentAmount" readonly>
+
+        </div>
+
+
+
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Product</th>
+                    <th>Price</th>
+                    <th>Quantity</th>
+                    <th>Notes</th>
+                    <th>SerialNumber</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="orderItem in order.items">
+                    <td>
+                        {{orderItem.product.name}}
+                    </td>
+                    <td>
+                        {{orderItem.price}}
+                    </td>
+                    <td>
+                        {{orderItem.qty}}
+                    </td>
+                    <td>
+                        {{orderItem.notes}}
+                    </td>
+                    <td>
+                        {{orderItem.serialNumber}}
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="form-group">
+            <label translate="dryhomeApp.order.vatRate">VatRate</label>
+            <input type="number" class="form-control" name="vatRate"
+                   ng-model="order.vatRate" readonly>
+
+        </div>
+        <div class="form-group">
+            <label>Sub Total</label>
+            <input type="number" class="form-control" name="subTotal"
+                   ng-model="order.subTotal" readonly>
+        </div>
+        <div class="form-group">
+            <label>Vat Amount</label>
+            <input type="number" class="form-control" name="vatAmount"
+                   ng-model="order.vatAmount" readonly>
+        </div>
+        <div class="form-group">
+            <label>Total Amount</label>
+            <input type="number" class="form-control" name="totalAmount"
+                   ng-model="order.totalAmount" readonly>
+        </div>
+    </div>
+
+    <div class="dropdown">
+        <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true">
+            Printing
+            <span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+            <li role="presentation"><a role="menuitem" tabindex="-1" href="api/order/doc/{{order.id}}/customer_invoice">Customer Invoice</a></li>
+        </ul>
+    </div>
+    <div></div>
+
+    <button type="submit"
+            ui-sref="order"
+            class="btn btn-info">
+        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span translate="entity.action.back"> Back</span>
+    </button>
+</div>

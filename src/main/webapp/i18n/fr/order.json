@@ -1,0 +1,34 @@
+{
+    "dryhomeApp": {
+        "order" : {
+            "home": {
+                "title": "Orders",
+                "createLabel": "Créer un nouveau Order",
+                "createOrEditLabel": "Créer ou éditer un Order"
+            },
+            "delete": {
+                "question": "Etes-vous certain de vouloir supprimer le Order {{ id }} ?"
+            },
+            "detail": {
+                "title": "Order"
+            },
+            "orderNumber": "OrderNumber",
+            "orderDate": "OrderDate",
+            "dispatchDate": "DispatchDate",
+            "invoiceDate": "InvoiceDate",
+            "placedBy": "PlacedBy",
+            "method": "Method",
+            "invoiceNumber": "InvoiceNumber",
+            "invoiceNotes1": "InvoiceNotes1",
+            "invoiceNotes2": "InvoiceNotes2",
+            "notes": "Notes",
+            "paymentDate": "PaymentDate",
+            "paymentStatus": "PaymentStatus",
+            "paymentType": "PaymentType",
+            "paymentAmount": "PaymentAmount",
+            "vatRate": "VatRate",
+            "customer": "customer"
+        }
+    }
+}
+

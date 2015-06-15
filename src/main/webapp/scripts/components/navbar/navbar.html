@@ -27,12 +27,20 @@
                                     <b class="caret"></b>
                                 </span>
                     </a>
-                    <ul class="dropdown-menu">
-                        <li ui-sref-active="active" ><a ui-sref="customer"><span class="glyphicon glyphicon-asterisk"></span>
+                    <!--<ul class="dropdown-menu">-->
+                        <li ui-sref-active="active" ng-switch-when="true" ><a ui-sref="customer"><span class="glyphicon glyphicon-asterisk"></span>
                         &#xA0;<span translate="global.menu.entities.customer">customer</span></a></li>
+                        <li ui-sref-active="active" ng-switch-when="true"><a ui-sref="order"><span class="glyphicon glyphicon-asterisk"></span>
+                        &#xA0;<span translate="global.menu.entities.order">order</span></a></li>
+                        <li ui-sref-active="active" ng-switch-when="true"><a ui-sref="product"><span class="glyphicon glyphicon-asterisk"></span>
+                        &#xA0;<span translate="global.menu.entities.product">product</span></a></li>
+                        <!--<li ui-sref-active="active" ><a ui-sref="orderItem"><span class="glyphicon glyphicon-asterisk"></span>-->
+                        <!--&#xA0;<span translate="global.menu.entities.orderItem">orderItem</span></a></li>-->
                         <!-- JHipster will add entities to the menu here -->
-                    </ul>
+                    <!--</ul>-->
                 </li>
+                <li ui-sref-active="active" ng-switch-when="false"><a ui-sref="login"><span class="glyphicon glyphicon-log-in"></span>
+                    &#xA0;<span translate="global.menu.account.login">Authenticate</span></a></li>
                 <li ng-class="{active: $state.includes('account')}" class="dropdown pointer">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="">
                                 <span>
@@ -52,8 +60,7 @@
                             &#xA0;<span translate="global.menu.account.sessions">Sessions</span></a></li>
                         <li ui-sref-active="active" ng-switch-when="true"><a href="" ng-click="logout()"><span class="glyphicon glyphicon-log-out"></span>
                             &#xA0;<span translate="global.menu.account.logout">Log out</span></a></li>
-                        <li ui-sref-active="active" ng-switch-when="false"><a ui-sref="login"><span class="glyphicon glyphicon-log-in"></span>
-                            &#xA0;<span translate="global.menu.account.login">Authenticate</span></a></li>
+
 
                         <li ui-sref-active="active" ng-switch-when="false"><a ui-sref="register"><span class="glyphicon glyphicon-plus-sign"></span>
                             &#xA0;<span translate="global.menu.account.register">Register</span></a></li>

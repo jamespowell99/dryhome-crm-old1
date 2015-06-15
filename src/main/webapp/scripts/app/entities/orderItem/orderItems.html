@@ -1,0 +1,172 @@
+<div>
+
+    <h2 translate="dryhomeApp.orderItem.home.title">OrderItem</h2>
+
+    <button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#saveOrderItemModal" ng-click="clear()">
+        <span class="glyphicon glyphicon-flash"></span> <span translate="dryhomeApp.orderItem.home.createLabel">Create a new OrderItem</span>
+    </button>
+    <div class="modal fade" id="saveOrderItemModal" tabindex="-1" role="dialog" aria-labelledby="myOrderItemLabel"
+         aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <form name="editForm" role="form" novalidate ng-submit="create()" show-validation>
+
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                                ng-click="clear()">&times;</button>
+                        <h4 class="modal-title" id="myOrderItemLabel" translate="dryhomeApp.orderItem.home.createOrEditLabel">Create or edit a OrderItem</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label>ID</label>
+                            <input type="text" class="form-control" name="id"
+                                   ng-model="orderItem.id" readonly>
+                        </div>
+
+                        <div class="form-group">
+                            <label translate="dryhomeApp.orderItem.price">Price</label>
+                            <input type="number" class="form-control" name="price"
+                                   ng-model="orderItem.price" required>
+
+                            <div ng-show="editForm.price.$invalid">
+                                <p class="help-block"
+                                   ng-show="editForm.price.$error.required" translate="entity.validation.required">
+                                    This field is required.
+                                </p>
+                                <p class="help-block"
+                                   ng-show="editForm.price.$error.number" translate="entity.validation.number">
+                                    This field should be a number.
+                                </p>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label translate="dryhomeApp.orderItem.qty">Qty</label>
+                            <input type="number" class="form-control" name="qty"
+                                   ng-model="orderItem.qty" required>
+
+                            <div ng-show="editForm.qty.$invalid">
+                                <p class="help-block"
+                                   ng-show="editForm.qty.$error.required" translate="entity.validation.required">
+                                    This field is required.
+                                </p>
+                                <p class="help-block"
+                                   ng-show="editForm.qty.$error.number" translate="entity.validation.number">
+                                    This field should be a number.
+                                </p>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label translate="dryhomeApp.orderItem.notes">Notes</label>
+                            <input type="text" class="form-control" name="notes"
+                                   ng-model="orderItem.notes">
+
+                        </div>
+                        <div class="form-group">
+                            <label translate="dryhomeApp.orderItem.order">Order</label>
+                            <input type="number" class="form-control" name="order"
+                                   ng-model="orderItem.order">
+
+                        </div>
+                        <div class="form-group">
+                            <label translate="dryhomeApp.orderItem.serialNumber">SerialNumber</label>
+                            <input type="text" class="form-control" name="serialNumber"
+                                   ng-model="orderItem.serialNumber">
+
+                        </div>
+
+                        <div class="form-group">
+                            <label translate="dryhomeApp.orderItem.orderId">orderId</label>
+                            <select class="form-control" name="orderId" ng-model="orderItem.orderId.id" ng-options="order.id as order.id for order in orders">
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label translate="dryhomeApp.orderItem.product">product</label>
+                            <select class="form-control" name="product" ng-model="orderItem.product.id" ng-options="product.id as product.name for product in products">
+                            </select>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="clear()">
+                            <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span translate="entity.action.cancel">Cancel</span>
+                        </button>
+                        <button type="submit" ng-disabled="editForm.$invalid" class="btn btn-primary">
+                            <span class="glyphicon glyphicon-save"></span>&nbsp;<span translate="entity.action.save">Save</span>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="deleteOrderItemConfirmation">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <form name="deleteForm" ng-submit="confirmDelete(orderItem.id)">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                                ng-click="clear()">&times;</button>
+                        <h4 class="modal-title" translate="entity.delete.title">Confirm delete operation</h4>
+                    </div>
+                    <div class="modal-body">
+                        <p translate="dryhomeApp.orderItem.delete.question" translate-values="{id: '{{orderItem.id}}'}">Are you sure you want to delete this OrderItem?</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="clear()">
+                            <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span translate="entity.action.cancel">Cancel</span>
+                        </button>
+                        <button type="submit" ng-disabled="deleteForm.$invalid" class="btn btn-danger">
+                            <span class="glyphicon glyphicon-remove-circle"></span>&nbsp;<span translate="entity.action.delete">Delete</span>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th translate="dryhomeApp.orderItem.price">Price</th>
+                    <th translate="dryhomeApp.orderItem.qty">Qty</th>
+                    <th translate="dryhomeApp.orderItem.notes">Notes</th>
+                    <th translate="dryhomeApp.orderItem.order">Order</th>
+                    <th translate="dryhomeApp.orderItem.serialNumber">SerialNumber</th>
+                    <th translate="dryhomeApp.orderItem.orderId">orderId</th>
+                    <th translate="dryhomeApp.orderItem.product">product</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="orderItem in orderItems">
+                    <td><a ui-sref="orderItemDetail({id:orderItem.id})">{{orderItem.id}}</a></td>
+                    <td>{{orderItem.price}}</td>
+                    <td>{{orderItem.qty}}</td>
+                    <td>{{orderItem.notes}}</td>
+                    <td>{{orderItem.order}}</td>
+                    <td>{{orderItem.serialNumber}}</td>
+                    <td>{{orderItem.orderId.id}}</td>
+                    <td>{{orderItem.product.name}}</td>
+                    <td>
+                        <button type="submit"
+                                ui-sref="orderItemDetail({id:orderItem.id})"
+                                class="btn btn-info">
+                            <span class="glyphicon glyphicon-eye-open"></span>&nbsp;<span translate="entity.action.view"> View</span>
+                        </button>
+                        <button type="submit"
+                                ng-click="update(orderItem.id)"
+                                class="btn btn-primary">
+                            <span class="glyphicon glyphicon-pencil"></span>&nbsp;<span translate="entity.action.edit"> Edit</span>
+                        </button>
+                        <button type="submit"
+                                ng-click="delete(orderItem.id)"
+                                class="btn btn-danger">
+                            <span class="glyphicon glyphicon-remove-circle"></span>&nbsp;<span translate="entity.action.delete"> Delete</span>
+                        </button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

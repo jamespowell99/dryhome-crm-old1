@@ -1,0 +1,87 @@
+{
+    "relationships": [
+        {
+            "relationshipId": 1,
+            "relationshipName": "orderId",
+            "relationshipNameCapitalized": "OrderId",
+            "relationshipFieldName": "orderId",
+            "otherEntityName": "order",
+            "relationshipType": "many-to-one",
+            "otherEntityNameCapitalized": "Order",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipId": 2,
+            "relationshipName": "product",
+            "relationshipNameCapitalized": "Product",
+            "relationshipFieldName": "product",
+            "otherEntityName": "product",
+            "relationshipType": "many-to-one",
+            "otherEntityNameCapitalized": "Product",
+            "otherEntityField": "name"
+        }
+    ],
+    "fields": [
+        {
+            "fieldId": 1,
+            "fieldName": "price",
+            "fieldType": "BigDecimal",
+            "fieldNameCapitalized": "Price",
+            "fieldNameUnderscored": "price",
+            "fieldInJavaBeanMethod": "Price",
+            "fieldValidate": true,
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldId": 2,
+            "fieldName": "qty",
+            "fieldType": "Integer",
+            "fieldNameCapitalized": "Qty",
+            "fieldNameUnderscored": "qty",
+            "fieldInJavaBeanMethod": "Qty",
+            "fieldValidate": true,
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldId": 3,
+            "fieldName": "notes",
+            "fieldType": "String",
+            "fieldNameCapitalized": "Notes",
+            "fieldNameUnderscored": "notes",
+            "fieldInJavaBeanMethod": "Notes",
+            "fieldValidate": false
+        },
+        {
+            "fieldId": 4,
+            "fieldName": "order",
+            "fieldType": "Integer",
+            "fieldNameCapitalized": "Order",
+            "fieldNameUnderscored": "order",
+            "fieldInJavaBeanMethod": "Order",
+            "fieldValidate": false
+        },
+        {
+            "fieldId": 5,
+            "fieldName": "serialNumber",
+            "fieldType": "String",
+            "fieldNameCapitalized": "SerialNumber",
+            "fieldNameUnderscored": "serial_number",
+            "fieldInJavaBeanMethod": "SerialNumber",
+            "fieldValidate": false
+        }
+    ],
+    "fieldsContainOwnerManyToMany": false,
+    "fieldsContainOneToMany": false,
+    "fieldsContainLocalDate": false,
+    "fieldsContainCustomTime": false,
+    "fieldsContainBigDecimal": true,
+    "fieldsContainDateTime": false,
+    "fieldsContainDate": false,
+    "changelogDate": "20150528214054",
+    "pagination": "no",
+    "validation": true
+}

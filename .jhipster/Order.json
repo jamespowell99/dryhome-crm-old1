@@ -1,0 +1,168 @@
+{
+    "relationships": [
+        {
+            "relationshipId": 1,
+            "relationshipName": "customer",
+            "relationshipNameCapitalized": "Customer",
+            "relationshipFieldName": "customer",
+            "otherEntityName": "customer",
+            "relationshipType": "many-to-one",
+            "otherEntityNameCapitalized": "Customer",
+            "otherEntityField": "name"
+        }
+    ],
+    "fields": [
+        {
+            "fieldId": 1,
+            "fieldName": "orderNumber",
+            "fieldType": "String",
+            "fieldNameCapitalized": "OrderNumber",
+            "fieldNameUnderscored": "order_number",
+            "fieldInJavaBeanMethod": "OrderNumber",
+            "fieldValidate": true,
+            "fieldValidateRules": [
+                "required",
+                "minlength",
+                "maxlength"
+            ],
+            "fieldValidateRulesMinlength": "3",
+            "fieldValidateRulesMaxlength": "15"
+        },
+        {
+            "fieldId": 2,
+            "fieldName": "orderDate",
+            "fieldType": "LocalDate",
+            "fieldNameCapitalized": "OrderDate",
+            "fieldNameUnderscored": "order_date",
+            "fieldInJavaBeanMethod": "OrderDate",
+            "fieldValidate": false
+        },
+        {
+            "fieldId": 3,
+            "fieldName": "dispatchDate",
+            "fieldType": "LocalDate",
+            "fieldNameCapitalized": "DispatchDate",
+            "fieldNameUnderscored": "dispatch_date",
+            "fieldInJavaBeanMethod": "DispatchDate",
+            "fieldValidate": false
+        },
+        {
+            "fieldId": 4,
+            "fieldName": "invoiceDate",
+            "fieldType": "LocalDate",
+            "fieldNameCapitalized": "InvoiceDate",
+            "fieldNameUnderscored": "invoice_date",
+            "fieldInJavaBeanMethod": "InvoiceDate",
+            "fieldValidate": false
+        },
+        {
+            "fieldId": 5,
+            "fieldName": "placedBy",
+            "fieldType": "String",
+            "fieldNameCapitalized": "PlacedBy",
+            "fieldNameUnderscored": "placed_by",
+            "fieldInJavaBeanMethod": "PlacedBy",
+            "fieldValidate": false
+        },
+        {
+            "fieldId": 6,
+            "fieldName": "method",
+            "fieldType": "String",
+            "fieldNameCapitalized": "Method",
+            "fieldNameUnderscored": "method",
+            "fieldInJavaBeanMethod": "Method",
+            "fieldValidate": false
+        },
+        {
+            "fieldId": 7,
+            "fieldName": "invoiceNumber",
+            "fieldType": "String",
+            "fieldNameCapitalized": "InvoiceNumber",
+            "fieldNameUnderscored": "invoice_number",
+            "fieldInJavaBeanMethod": "InvoiceNumber",
+            "fieldValidate": false
+        },
+        {
+            "fieldId": 8,
+            "fieldName": "invoiceNotes1",
+            "fieldType": "String",
+            "fieldNameCapitalized": "InvoiceNotes1",
+            "fieldNameUnderscored": "invoice_notes1",
+            "fieldInJavaBeanMethod": "InvoiceNotes1",
+            "fieldValidate": false
+        },
+        {
+            "fieldId": 9,
+            "fieldName": "invoiceNotes2",
+            "fieldType": "String",
+            "fieldNameCapitalized": "InvoiceNotes2",
+            "fieldNameUnderscored": "invoice_notes2",
+            "fieldInJavaBeanMethod": "InvoiceNotes2",
+            "fieldValidate": false
+        },
+        {
+            "fieldId": 10,
+            "fieldName": "notes",
+            "fieldType": "String",
+            "fieldNameCapitalized": "Notes",
+            "fieldNameUnderscored": "notes",
+            "fieldInJavaBeanMethod": "Notes",
+            "fieldValidate": false
+        },
+        {
+            "fieldId": 11,
+            "fieldName": "paymentDate",
+            "fieldType": "LocalDate",
+            "fieldNameCapitalized": "PaymentDate",
+            "fieldNameUnderscored": "payment_date",
+            "fieldInJavaBeanMethod": "PaymentDate",
+            "fieldValidate": false
+        },
+        {
+            "fieldId": 12,
+            "fieldName": "paymentStatus",
+            "fieldType": "String",
+            "fieldNameCapitalized": "PaymentStatus",
+            "fieldNameUnderscored": "payment_status",
+            "fieldInJavaBeanMethod": "PaymentStatus",
+            "fieldValidate": false
+        },
+        {
+            "fieldId": 13,
+            "fieldName": "paymentType",
+            "fieldType": "String",
+            "fieldNameCapitalized": "PaymentType",
+            "fieldNameUnderscored": "payment_type",
+            "fieldInJavaBeanMethod": "PaymentType",
+            "fieldValidate": false
+        },
+        {
+            "fieldId": 14,
+            "fieldName": "paymentAmount",
+            "fieldType": "String",
+            "fieldNameCapitalized": "PaymentAmount",
+            "fieldNameUnderscored": "payment_amount",
+            "fieldInJavaBeanMethod": "PaymentAmount",
+            "fieldValidate": false
+        },
+        {
+            "fieldId": 15,
+            "fieldName": "vatRate",
+            "fieldType": "BigDecimal",
+            "fieldNameCapitalized": "VatRate",
+            "fieldNameUnderscored": "vat_rate",
+            "fieldInJavaBeanMethod": "VatRate",
+            "fieldValidate": false
+        }
+    ],
+    "fieldsContainOwnerManyToMany": false,
+    "fieldsContainOneToMany": false,
+    "fieldsContainLocalDate": true,
+    "fieldsContainCustomTime": true,
+    "fieldsContainBigDecimal": true,
+    "fieldsContainDateTime": false,
+    "fieldsContainDate": false,
+    "changelogDate": "20150528213442",
+    "pagination": "pagination",
+    "validation": true
+}
