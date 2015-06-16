@@ -196,7 +196,7 @@
                     <td>{{order.invoiceDate}}</td>
                     <td>{{order.invoiceNumber}}</td>
                     <td>{{order.paymentDate}}</td>
-                    <td></td>
+                    <td>{{order.totalAmount | currency:"£"}}</td>
                     <td>
                         <button type="submit"
                                 ng-click="update(order.id)"

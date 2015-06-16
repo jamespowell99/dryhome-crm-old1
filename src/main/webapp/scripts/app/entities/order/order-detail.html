@@ -104,7 +104,7 @@
                         {{orderItem.product.name}}
                     </td>
                     <td>
-                        {{orderItem.price}}
+                        {{orderItem.price | currency:"£"}}
                     </td>
                     <td>
                         {{orderItem.qty}}
@@ -119,25 +119,21 @@
             </tbody>
         </table>
         <div class="form-group">
-            <label translate="dryhomeApp.order.vatRate">VatRate</label>
-            <input type="number" class="form-control" name="vatRate"
-                   ng-model="order.vatRate" readonly>
+            <label translate="dryhomeApp.order.vatRate">VatRate: </label><div>{{order.vatRate | currency:'£'}}</div>
 
         </div>
         <div class="form-group">
             <label>Sub Total</label>
-            <input type="number" class="form-control" name="subTotal"
-                   ng-model="order.subTotal" readonly>
+            <div>{{order.subTotal | currency:'£'}}</div>
         </div>
         <div class="form-group">
             <label>Vat Amount</label>
-            <input type="number" class="form-control" name="vatAmount"
-                   ng-model="order.vatAmount" readonly>
+            <div>{{order.vatAmount | currency:'£'}}</div>
+
         </div>
         <div class="form-group">
             <label>Total Amount</label>
-            <input type="number" class="form-control" name="totalAmount"
-                   ng-model="order.totalAmount" readonly>
+            <div>{{order.totalAmount | currency:'£'}}</div>
         </div>
     </div>
 
