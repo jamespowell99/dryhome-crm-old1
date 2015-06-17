@@ -12,6 +12,7 @@ import com.powtechconsulting.mailmerge.WordMerger;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -95,7 +96,7 @@ public class OrderResource {
     public ResponseEntity<List<Order>> getAll(@RequestParam(value = "page" , required = false) Integer offset,
                                   @RequestParam(value = "per_page", required = false) Integer limit)
         throws URISyntaxException {
-        Page<Order> page = orderRepository.findAll(PaginationUtil.generatePageRequest(offset, limit));
+        Page<Order> page = orderRepository.findAll(PaginationUtil.generatePageRequest(offset, limit, new Sort(Sort.Direction.DESC, "orderDate")));
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/orders", offset, limit);
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
