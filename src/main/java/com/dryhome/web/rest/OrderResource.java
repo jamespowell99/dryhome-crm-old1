@@ -1,14 +1,12 @@
 package com.dryhome.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
-import com.dryhome.domain.Customer;
 import com.dryhome.domain.Order;
+import com.dryhome.domain.OrderItem;
+import com.dryhome.repository.OrderItemRepository;
 import com.dryhome.repository.OrderRepository;
 import com.dryhome.service.MergeService;
 import com.dryhome.web.rest.util.PaginationUtil;
-import com.google.common.base.Preconditions;
-import com.powtechconsulting.mailmerge.DocControlMerger;
-import com.powtechconsulting.mailmerge.WordMerger;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
@@ -17,19 +15,18 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.util.FileCopyUtils;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
-import java.io.ByteArrayInputStream;
-import java.io.InputStream;
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.net.URL;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -46,6 +43,9 @@ public class OrderResource {
     private OrderRepository orderRepository;
 
     @Inject
+    private OrderItemRepository orderItemRepository;
+
+    @Inject
     private MergeService mergeService;
 
     @RequestMapping(value = "/order/doc/{orderId}/{templateName}", method = RequestMethod.GET, produces = MediaType.APPLICATION_OCTET_STREAM_VALUE)
@@ -58,8 +58,8 @@ public class OrderResource {
      * POST  /orders -> Create a new order.
      */
     @RequestMapping(value = "/orders",
-            method = RequestMethod.POST,
-            produces = MediaType.APPLICATION_JSON_VALUE)
+        method = RequestMethod.POST,
+        produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
     public ResponseEntity<Void> create(@Valid @RequestBody Order order) throws URISyntaxException {
         log.debug("REST request to save Order : {}", order);
@@ -67,6 +67,10 @@ public class OrderResource {
             return ResponseEntity.badRequest().header("Failure", "A new order cannot already have an ID").build();
         }
         orderRepository.save(order);
+        for(OrderItem item : order.getItems()) {
+            item.setOrderId(order);
+            orderItemRepository.save(item);
+        }
         return ResponseEntity.created(new URI("/api/orders/" + order.getId())).build();
     }
 
@@ -82,6 +86,19 @@ public class OrderResource {
         if (order.getId() == null) {
             return create(order);
         }
+        Order existingOrder = orderRepository.findOne(order.getId());
+        for(OrderItem existingItem : existingOrder.getItems()) {
+            Optional<OrderItem> orderItem = order.getItems().
+                stream().
+                filter(oi -> oi.getId() != null && oi.getId().equals(existingItem.getId())).findFirst();
+            if (!orderItem.isPresent()) {
+                orderItemRepository.delete(existingItem);
+            }
+        }
+        for(OrderItem item : order.getItems()) {
+            item.setOrderId(order);
+            orderItemRepository.save(item);
+        }
         orderRepository.save(order);
         return ResponseEntity.ok().build();
     }
@@ -90,11 +107,11 @@ public class OrderResource {
      * GET  /orders -> get all the orders.
      */
     @RequestMapping(value = "/orders",
-            method = RequestMethod.GET,
-            produces = MediaType.APPLICATION_JSON_VALUE)
+        method = RequestMethod.GET,
+        produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
-    public ResponseEntity<List<Order>> getAll(@RequestParam(value = "page" , required = false) Integer offset,
-                                  @RequestParam(value = "per_page", required = false) Integer limit)
+    public ResponseEntity<List<Order>> getAll(@RequestParam(value = "page", required = false) Integer offset,
+                                              @RequestParam(value = "per_page", required = false) Integer limit)
         throws URISyntaxException {
         Page<Order> page = orderRepository.findAll(PaginationUtil.generatePageRequest(offset, limit, new Sort(Sort.Direction.DESC, "orderDate")));
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/orders", offset, limit);
@@ -105,8 +122,8 @@ public class OrderResource {
      * GET  /orders/:id -> get the "id" order.
      */
     @RequestMapping(value = "/orders/{id}",
-            method = RequestMethod.GET,
-            produces = MediaType.APPLICATION_JSON_VALUE)
+        method = RequestMethod.GET,
+        produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
     public ResponseEntity<Order> get(@PathVariable Long id) {
         log.debug("REST request to get Order : {}", id);
@@ -121,8 +138,8 @@ public class OrderResource {
      * DELETE  /orders/:id -> delete the "id" order.
      */
     @RequestMapping(value = "/orders/{id}",
-            method = RequestMethod.DELETE,
-            produces = MediaType.APPLICATION_JSON_VALUE)
+        method = RequestMethod.DELETE,
+        produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
     public void delete(@PathVariable Long id) {
         log.debug("REST request to delete Order : {}", id);

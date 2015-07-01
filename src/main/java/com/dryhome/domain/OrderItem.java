@@ -35,7 +35,7 @@ public class OrderItem implements Serializable {
     @Column(name = "notes")
     private String notes;
 
-    @Column(name = "order")
+    @Column(name = "order_index")
     private Integer order;
 
     @Column(name = "serial_number")

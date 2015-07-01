@@ -26,7 +26,7 @@
             <column name="invoice_number" type="varchar(255)"/>
             <column name="invoice_notes1" type="varchar(255)"/>
             <column name="invoice_notes2" type="varchar(255)"/>
-            <column name="notes" type="varchar(255)"/>
+            <column name="notes" type="longtext"/>
             <column name="payment_date" type="date"/>
             <column name="payment_status" type="varchar(255)"/>
             <column name="payment_type" type="varchar(255)"/>

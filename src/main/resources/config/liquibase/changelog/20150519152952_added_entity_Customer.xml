@@ -32,8 +32,8 @@
             <column name="products" type="varchar(255)"/>
             <column name="interested" type="varchar(255)"/>
             <column name="paid" type="decimal(10,2)"/>
-            <column name="notes" type="varchar(255)"/>
+            <column name="notes" type="longtext"/>
         </createTable>
-        
+
     </changeSet>
 </databaseChangeLog>

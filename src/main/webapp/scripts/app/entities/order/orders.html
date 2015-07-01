@@ -127,7 +127,45 @@
                                    ng-model="order.vatRate">
 
                         </div>
-
+                        <table class="table table-striped table-condensed">
+                            <thead>
+                            <tr>
+                                <th >Product</th>
+                                <th class="col-md-2">Price</th>
+                                <th class="col-md-2">Quantity</th>
+                                <th>Notes</th>
+                                <th>SerialNumber</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr ng-repeat="orderItem in order.items">
+                                <td >
+                                    <select class="form-control" name="product" ng-model="orderItem.product.id" ng-options="product.id as product.name for product in products">
+                                    </select>
+                                </td>
+                                <td>
+                                    <input type="text" ng-model="orderItem.price" class="form-control"/>
+                                </td>
+                                <td>
+                                    <input type="text" ng-model="orderItem.qty" class="form-control"/>
+                                </td>
+                                <td>
+                                    <input type="text" ng-model="orderItem.notes" class="form-control"/>
+                                </td>
+                                <td>
+                                    <input type="text" ng-model="orderItem.text" class="form-control"/>
+                                </td>
+                                <td>
+                                    <a ng-click="removeOrderItem(orderItem.id)" class="btn btn-default">
+                                        <span class="glyphicon glyphicon-remove"></span>
+                                    </a>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                        <a ng-click="addOrderItem()" class="btn btn-default">
+                            <span class="glyphicon glyphicon-plus"></span>
+                        </a>
                         <div class="form-group">
                             <label translate="dryhomeApp.order.customer">customer</label>
                             <select class="form-control" name="customer" ng-model="order.customer.id" ng-options="customer.id as customer.name for customer in customers">

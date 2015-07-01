@@ -12,6 +12,7 @@ import org.joda.time.LocalDate;
 import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -110,7 +111,7 @@ public class Order implements MergeableObject {
     @ManyToOne
     private Customer customer;
 
-    @OneToMany(mappedBy = "orderId", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "orderId", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private List<OrderItem> items = new ArrayList<>();
 
     public Long getId() {

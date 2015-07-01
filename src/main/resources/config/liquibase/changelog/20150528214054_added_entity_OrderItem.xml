@@ -22,12 +22,12 @@
                 <constraints nullable="false" />
             </column>
             <column name="notes" type="varchar(255)"/>
-            <column name="order" type="integer"/>
+            <column name="order_index" type="integer"/>
             <column name="serial_number" type="varchar(255)"/>
             <column name="orderid_id" type="bigint"/>
             <column name="product_id" type="bigint"/>
         </createTable>
-        
+
         <addForeignKeyConstraint baseColumnNames="orderid_id"
                                  baseTableName="T_ORDERITEM"
                                  constraintName="fk_orderitem_orderid_id"
