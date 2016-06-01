@@ -21,6 +21,7 @@ module.exports = function (config) {
             'main/webapp/bower_components/angular-resource/angular-resource.js',
             'main/webapp/bower_components/angular-cookies/angular-cookies.js',
             'main/webapp/bower_components/angular-sanitize/angular-sanitize.js',
+            'main/webapp/bower_components/angular-bootstrap/ui-bootstrap-tpls.js',
             'main/webapp/bower_components/angular-translate/angular-translate.js',
             'main/webapp/bower_components/angular-translate-storage-cookie/angular-translate-storage-cookie.js',
             'main/webapp/bower_components/angular-translate-loader-partial/angular-translate-loader-partial.js',

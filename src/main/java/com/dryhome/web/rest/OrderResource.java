@@ -135,6 +135,19 @@ public class OrderResource {
     }
 
     /**
+     * GET  /orders/:id -> get the "id" order.
+     */
+    @RequestMapping(value = "/customers/{customerId}/orders",
+        method = RequestMethod.GET,
+        produces = MediaType.APPLICATION_JSON_VALUE)
+    @Timed
+    public ResponseEntity<List<Order>> getByCustomerId(@PathVariable Long customerId) {
+        log.debug("REST request to get Order : {}", customerId);
+        List<Order> orders = orderRepository.findByCustomerId(customerId);
+        return new ResponseEntity<>(orders, HttpStatus.OK);
+    }
+
+    /**
      * DELETE  /orders/:id -> delete the "id" order.
      */
     @RequestMapping(value = "/orders/{id}",
